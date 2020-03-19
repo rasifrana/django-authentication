@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block page_title%}{% endblock %}</title>
+    <style>
+
+        body {
+            background-color: teal;
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            
+        }
+
+        nav {
+            height: 50px;
+            color: white;
+            padding: 10px;
+           background-color: green;
+        }
+
+        ul {
+            display: flex;
+             width: 50%;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+        }
+
+        li a {
+            text-decoration: none;
+            color: white;
+            padding: 5px 10px;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <nav>
+    <ul>
+        {% if user.is_authenticated %}
+        <li><a href="#">Profile</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'registration' %}">Register</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+    </nav>
+
+    <hr>
+
+    
+
+    <div class="container">
+
+    <h1>{% block page_heading%}{% endblock %}</h1>
+    <div>
+        {% if messages %}
+         
+          {% for message in messages %}
+
+         <h3> {{ message }} </h3>
+
+          {% endfor %}
+
+        {% endif %}
+    
+    
+    </div>
+    {% block content%}{% endblock %}
+    
+    </div>
+    
+    
+</body>
+</html>
